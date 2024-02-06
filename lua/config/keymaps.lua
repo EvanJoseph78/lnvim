@@ -15,8 +15,8 @@ map("n", "<F4>", lazyterm, { desc = "Terminal 1 (root dir) " })
 map("n", "<F5>", function()
   Util.terminal()
 end, { desc = "Terminal 2 (cwd)" })
-map("n", "<c-/>", lazyterm, { desc = "Terminal (root dir)" })
-map("n", "<c-_>", lazyterm, { desc = "which_key_ignore" })
+-- map("n", "<c-/>", lazyterm, { desc = "Terminal (root dir)" })
+-- map("n", "<c-_>", lazyterm, { desc = "which_key_ignore" })
 
 -- Terminal Mappings
 map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
@@ -26,7 +26,7 @@ map("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to upper window" })
 map("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to right window" })
 map("t", "<F4>", "<cmd>close<cr>", { desc = "Hide Terminal 1" })
 map("t", "<F5>", "<cmd>close<cr>", { desc = "Hide Terminal 2" })
-map("t", "<c-_>", "<C-w>", { desc = "which_key_ignore" })
+map("t", "<C-h>", "<C-w>", { desc = "which_key_ignore" })
 
 -- buffers
 map("n", "<C-pageUp>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
@@ -147,6 +147,9 @@ map("n", "<tab>", ">>")
 map("n", "<S-tab>", "<<")
 map("n", "<enter>", "o<esc>")
 map("n", "<BS>", "a<C-h><esc>")
+map("n", "<C-p>", ":")
+map("i", "<C-p>", "<Esc>:")
+map("v", "<C-p>", "<Esc>:")
 
 -- delete
 map("n", "dx", "di'")
