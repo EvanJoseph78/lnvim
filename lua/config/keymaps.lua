@@ -17,6 +17,27 @@ map("n", "<F5>", function()
 end, { desc = "Terminal 2 (cwd)" })
 -- map("n", "<c-/>", lazyterm, { desc = "Terminal (root dir)" })
 -- map("n", "<c-_>", lazyterm, { desc = "which_key_ignore" })
+--
+-- Expolorer
+
+-- formatting
+map({ "n", "v" }, "<C-_>", function()
+  Util.format({ force = true })
+end, { desc = "Format" })
+
+-- lazygit
+map("n", "<leader>gg", function()
+  Util.terminal({ "lazygit" }, { cwd = Util.root(), esc_esc = false, ctrl_hjkl = false })
+end, { desc = "Lazygit (root dir)" })
+map("n", "<leader>gG", function()
+  Util.terminal({ "lazygit" }, { esc_esc = false, ctrl_hjkl = false })
+end, { desc = "Lazygit (cwd)" })
+
+-- quit
+map("n", "Q", "<cmd>qa<cr>", { desc = "Quit all" })
+
+-- highlights under cursor
+map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
 
 -- Terminal Mappings
 map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
@@ -65,8 +86,6 @@ map("n", "<Tab>", ">>")
 map("n", "<S-Tab>", "<<")
 
 map("i", "<S-Tab>", "<Esc><<I")
--- maps.v["<S-Up>"] = { ":'<,'>move'>+1<CR>v", desc = "Move text up"}
-
 map("i", "<S-Up>", "<Esc>")
 
 -- Shift behaviour
@@ -150,6 +169,7 @@ map("n", "<BS>", "a<C-h><esc>")
 map("n", "<C-p>", ":")
 map("i", "<C-p>", "<Esc>:")
 map("v", "<C-p>", "<Esc>:")
+map("n", "<Esc>", "zz")
 
 -- delete
 map("n", "dx", "di'")
