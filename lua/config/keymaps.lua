@@ -249,6 +249,7 @@ map("n", "el", "_y$") -- copia linha sem quebra de linha
 -- copy
 
 -- past
+map("v", "w", "p")
 map("n", "W", "P")
 map("n", "ww", "p")
 map("n", "wx", "vi'p")
