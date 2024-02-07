@@ -42,6 +42,7 @@ vim.keymap.set("", "s", function()
 end, { remap = true })
 
 -- formatting
+--
 map({ "n", "v" }, "<C-_>", function()
   Util.format({ force = true })
 end, { desc = "Format" })
@@ -77,6 +78,16 @@ map("n", "<C-t>", "<cmd>BufferLineCloseOthers<cr>", { desc = "Next buffer" })
 map("n", "<C-w>", "<cmd>bdelete<cr>", { desc = "Next buffer" })
 map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
+
+map("i", "<C-pageUp>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
+map("i", "<C-pageDown>", "<cmd>bnext<cr>", { desc = "Next buffer" })
+map("i", "<C-t>", "<cmd>BufferLineCloseOthers<cr>", { desc = "Next buffer" })
+map("i", "<C-w>", "<cmd>bdelete<cr>", { desc = "Next buffer" })
+
+map("v", "<C-pageUp>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
+map("v", "<C-pageDown>", "<cmd>bnext<cr>", { desc = "Next buffer" })
+map("v", "<C-t>", "<cmd>BufferLineCloseOthers<cr>", { desc = "Next buffer" })
+map("v", "<C-w>", "<cmd>bdelete<cr>", { desc = "Next buffer" })
 
 -- save file
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
@@ -266,5 +277,3 @@ map("n", "vx", "vi'")
 map("v", "'", "c''<Esc>hp")
 
 -- Visual --
-
--- navigation tabs
