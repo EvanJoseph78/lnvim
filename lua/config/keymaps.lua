@@ -56,7 +56,7 @@ map("n", "<leader>gG", function()
 end, { desc = "Lazygit (cwd)" })
 
 -- quit
-map("n", "Q", "<cmd>qa<cr>", { desc = "Quit all" })
+map("n", "Q", "<cmd>q!<cr>", { desc = "Quit" })
 
 -- highlights under cursor
 map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
@@ -74,19 +74,19 @@ map("t", "<C-h>", "<C-w>", { desc = "which_key_ignore" })
 -- buffers
 map("n", "<C-pageUp>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 map("n", "<C-pageDown>", "<cmd>bnext<cr>", { desc = "Next buffer" })
-map("n", "<C-t>", "<cmd>BufferLineCloseOthers<cr>", { desc = "Next buffer" })
-map("n", "<C-w>", "<cmd>bdelete<cr>", { desc = "Next buffer" })
+map("n", "<C-t>", "<cmd>BufferLineCloseOthers<cr>", { desc = "Close all others buffers" })
+map("n", "<C-w>", "<cmd>bdelete<cr>", { desc = "Close current buffer" })
 map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 
 map("i", "<C-pageUp>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 map("i", "<C-pageDown>", "<cmd>bnext<cr>", { desc = "Next buffer" })
-map("i", "<C-t>", "<cmd>BufferLineCloseOthers<cr>", { desc = "Next buffer" })
-map("i", "<C-w>", "<cmd>bdelete<cr>", { desc = "Next buffer" })
+map("i", "<C-t>", "<cmd>BufferLineCloseOthers<cr>", { desc = "Close all others buffers" })
+map("i", "<C-w>", "<cmd>bdelete<cr>", { desc = "Close current buffer" })
 
 map("v", "<C-pageUp>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
-map("v", "<C-pageDown>", "<cmd>bnext<cr>", { desc = "Next buffer" })
-map("v", "<C-t>", "<cmd>BufferLineCloseOthers<cr>", { desc = "Next buffer" })
+map("v", "<C-pageDown>", "<cmd>bnext<cr>", { desc = "Close all others buffers" })
+map("v", "<C-t>", "<cmd>BufferLineCloseOthers<cr>", { desc = "Close all others buffers" })
 map("v", "<C-w>", "<cmd>bdelete<cr>", { desc = "Next buffer" })
 
 -- save file
@@ -177,6 +177,22 @@ map("n", "<S-Home>", "_")
 map("v", "p", '"_dP"')
 
 -- Utilits Remap
+
+--TODO colocar o esc pra formatar
+
+map("n", "<F1>", "<cmd>:Neotree filesystem reveal left toggle<cr>")
+map("i", "<F1>", "<cmd>:Neotree filesystem reveal left toggle<cr>")
+map("v", "<F1>", "<cmd>:Neotree filesystem reveal left toggle<cr>")
+map("n", "<F2>", "<cmd>:Telescope live_grep<cr>")
+map("i", "<F2>", "<cmd>:Telescope live_grep<cr>")
+map("v", "<F2>", "<cmd>:Telescope live_grep<cr>")
+
+map("n", "m", '"')
+map("v", "m", '"')
+
+map("n", "|", "<cmd>:vsplit<cr>")
+map("v", "|", "<cmd>:vsplit<cr>")
+
 map("n", "<C-left>", "b")
 map("n", "<C-right>", "w")
 map("", "<pageDown>", "<C-d>")
@@ -197,11 +213,16 @@ map("n", "<tab>", ">>")
 map("n", "<tab>", ">>")
 map("n", "<S-tab>", "<<")
 map("n", "<enter>", "o<esc>")
-map("n", "<BS>", "a<C-h><esc>")
+map("n", "<BS>", "x")
 map("n", "<C-p>", ":")
 map("i", "<C-p>", "<Esc>:")
 map("v", "<C-p>", "<Esc>:")
-map("n", "<Esc>", "zz")
+
+-- formatting
+map("n", "<Esc>", function()
+  Util.format({ force = true })
+  vim.cmd("normal! zz")
+end, { desc = "Format" })
 
 -- delete
 map("n", "dx", "di'")
