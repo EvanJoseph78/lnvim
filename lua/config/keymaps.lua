@@ -121,7 +121,7 @@ map("i", "<S-Tab>", "<Esc><<I")
 map("i", "<S-Up>", "<Esc>")
 
 -- Shift behaviour
---
+
 map("n", "<S-Right>", "<Esc>vl")
 map("n", "<c-s-right>", "<esc>ve")
 map("n", "<C-S-Left>", "<Esc>vb")
