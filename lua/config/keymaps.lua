@@ -286,6 +286,7 @@ map("n", "wW", "viwp")
 
 map("n", "vp", "viw") -- seleciona palavra
 map("n", "vl", "_v$h") -- seleciona linha
+map("n", "vv", "_v$h") -- seleciona linha
 map("n", "vA", "ggVG")
 map("n", "vj", "vi(")
 map("v", "(", "c()<Esc>hp")
