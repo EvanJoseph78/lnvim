@@ -57,6 +57,7 @@ end, { desc = "Lazygit (cwd)" })
 
 -- quit
 map("n", "Q", "<cmd>q!<cr>", { desc = "Quit" })
+map("n", "<C-d>", "<cmd>q!<cr>", { desc = "Quit" })
 
 -- highlights under cursor
 map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
@@ -219,10 +220,12 @@ map("i", "<C-p>", "<Esc>:")
 map("v", "<C-p>", "<Esc>:")
 
 -- formatting
-map("n", "<Esc>", function()
-  Util.format({ force = true })
-  vim.cmd("normal! zz")
-end, { desc = "Format" })
+-- map("n", "<Esc>", function()
+--   Util.format({ force = true })
+--   vim.cmd("normal! zz")
+-- end, { desc = "Format" })
+--
+map("n", "<Esc>", "zz")
 
 -- delete
 map("n", "dx", "di'")
