@@ -58,6 +58,29 @@ end, { desc = "Lazygit (cwd)" })
 -- quit
 map("n", "Q", "<cmd>q!<cr>", { desc = "Quit" })
 map("n", "<C-d>", "<cmd>q!<cr>", { desc = "Quit" })
+map("v", "<C-d>", "<cmd>q!<cr>", { desc = "Quit" })
+map("i", "<C-d>", "<cmd>q!<cr>", { desc = "Quit" })
+
+-- delete
+map("n", "<C-x>", "dd")
+map("v", "<C-x>", "d")
+map("i", "<C-x>", "<Esc>ddi")
+
+-- paste
+map("n", "<C-v>", "p")
+map("v", "<C-v>", "p")
+map("i", "<C-v>", "<Esc>pa")
+
+-- copy
+map("n", "<C-c>", "yy")
+map("v", "<C-c>", "y")
+map("i", "<C-c>", "<Esc>yya")
+
+-- Selecionar tudo
+
+map("n", "<C-a>", "ggVGyggVG")
+map("v", "<C-a>", "<Esc>ggVG")
+map("i", "<C-a>", "<Esc>ggVG")
 
 -- highlights under cursor
 map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
@@ -124,7 +147,7 @@ map("i", "<S-Up>", "<Esc>")
 -- Shift behaviour
 
 map("n", "<S-Right>", "<Esc>vl")
-map("n", "<c-s-right>", "<esc>ve")
+map("n", "<C-s-right>", "<esc>ve")
 map("n", "<C-S-Left>", "<Esc>vb")
 map("n", "<S-Left>", "<Esc>vh")
 map("n", "<S-Up>", "<Esc>vk")
@@ -135,7 +158,6 @@ map("n", "<S-Home>", "<Esc>v_")
 -- Insert --
 map("i", "<C-z>", "<Esc>ui")
 map("i", "<C-y>", "<Esc><C-r>i")
-map("i", "<C-v>", "<Esc>pa")
 
 --
 map("i", "<A-j>", "<Esc>:m .+1<CR>==", opts)
@@ -206,8 +228,7 @@ map("n", "<C-S-pageUp>", "<C-W><")
 map("n", "<C-S-pageDown>", "<C-W>>")
 map("n", "<A-up>", "<C-W>+")
 map("n", "<A-down>", "<C-W>-")
-map("n", "<C-a>", "ggVGy")
--- map("i", "<C-z>", "<Esc>ui")
+
 map("i", "<C-r>", "<Esc><C-r>i")
 map("n", "<C-f>", "/")
 map("i", "<C-f>", "<Esc>/")
@@ -293,6 +314,7 @@ map("n", "vl", "_v$h") -- seleciona linha
 map("n", "vv", "_v$h") -- seleciona linha
 map("n", "vA", "ggVG")
 map("n", "vj", "vi(")
+map("n", "vi", "va(")
 map("v", "(", "c()<Esc>hp")
 map("n", "vo", "vi{")
 map("v", "{", "c{}<Esc>hp")
