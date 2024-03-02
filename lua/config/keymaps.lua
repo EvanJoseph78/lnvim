@@ -170,8 +170,9 @@ map("v", "<C-S-Right>", "e")
 map("v", "<C-S-Left>", "b")
 map("v", "<C-Right>", "e")
 map("v", "<C-Left>", "b")
-map("n", "<S-End>", "$")
-map("n", "<S-Home>", "_")
+
+map("v", "<S-End>", "$")
+map("v", "<S-Home>", "_")
 
 -- Visual Block
 
