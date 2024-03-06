@@ -202,7 +202,8 @@ map("v", "p", '"_dP"')
 
 -- Utilits Remap
 
---TODO colocar o esc pra formatar
+--
+map("n", "b", "@")
 
 map("n", "<F12>", "<cmd>:Neotree filesystem reveal left toggle<cr>")
 map("i", "<F12>", "<cmd>:Neotree filesystem reveal left toggle<cr>")
@@ -233,9 +234,6 @@ map("i", "<C-r>", "<Esc><C-r>i")
 map("n", "<C-f>", "/")
 map("i", "<C-f>", "<Esc>/")
 
-map("n", "<tab>", ">>")
-map("n", "<tab>", ">>")
-map("n", "<S-tab>", "<<")
 map("n", "<enter>", "o<esc>")
 map("n", "<BS>", "x")
 map("n", "<C-p>", ":")
@@ -248,7 +246,8 @@ map("v", "<C-p>", "<Esc>:")
 --   vim.cmd("normal! zz")
 -- end, { desc = "Format" })
 --
-map("n", "<Esc>", "zz")
+-- map("n", "<Esc>", "zz")
+map("n", "<Esc>", "==zz")
 
 -- delete
 map("n", "dx", "di'")
@@ -342,7 +341,6 @@ map("n", "vq", function()
 
   -- Obtém o caractere sob o cursor
   local char_under_cursor = line:sub(cursor_position[2] - 1, cursor_position[2] - 1)
-  print(char_under_cursor)
 
   -- Itera até encontrar as aspas ou o final da linha
   local index = cursor_position[2]
@@ -363,16 +361,15 @@ map("n", "vq", function()
     index = index + 1
     char_under_cursor = line:sub(index, index)
   end
-end, { desc = "Teste" })
+end, { desc = "" })
 
-map("n", "cq", function()
+map("n", "vQ", function()
   -- Salva a posição atual do cursor
   local cursor_position = vim.api.nvim_win_get_cursor(0)
   local line = vim.api.nvim_get_current_line()
 
   -- Obtém o caractere sob o cursor
   local char_under_cursor = line:sub(cursor_position[2] - 1, cursor_position[2] - 1)
-  print(char_under_cursor)
 
   -- Itera até encontrar as aspas ou o final da linha
   local index = cursor_position[2]
@@ -380,11 +377,11 @@ map("n", "cq", function()
     if char_under_cursor == '"' or char_under_cursor == "'" then
       -- Se estiver dentro de aspas duplas, seleciona o texto dentro delas
       if char_under_cursor == '"' then
-        vim.cmd([[normal! ci"]])
+        vim.cmd([[normal! va"]])
         -- Se estiver dentro de aspas simples, seleciona o texto dentro delas
         break -- Sai do loop quando encontrar as aspas
       elseif char_under_cursor == "'" then
-        vim.cmd([[normal! ci']])
+        vim.cmd([[normal! va']])
         break -- Sai do loop quando encontrar as aspas
       end
       break -- Sai do loop quando encontrar as aspas
@@ -393,7 +390,73 @@ map("n", "cq", function()
     index = index + 1
     char_under_cursor = line:sub(index, index)
   end
-end, { desc = "Teste" })
+end, { desc = "" })
+
+map("n", "cq", function()
+  -- Salva a posição atual do cursor
+  local cursor_position = vim.api.nvim_win_get_cursor(0)
+  local line = vim.api.nvim_get_current_line()
+
+  -- Obtém o caractere sob o cursor
+  local char_under_cursor = line:sub(cursor_position[2] - 1, cursor_position[2] - 1)
+
+  -- Itera até encontrar as aspas ou o final da linha
+  local index = cursor_position[2]
+  while index <= #line do
+    if char_under_cursor == '"' or char_under_cursor == "'" then
+      -- Se estiver dentro de aspas duplas, seleciona o texto dentro delas
+      if char_under_cursor == '"' then
+        vim.cmd([[normal! ci"]])
+        vim.cmd([[normal! l]])
+        vim.cmd([[startinsert]])
+        -- Se estiver dentro de aspas simples, seleciona o texto dentro delas
+        break -- Sai do loop quando encontrar as aspas
+      elseif char_under_cursor == "'" then
+        vim.cmd([[normal! ci']])
+        vim.cmd([[normal! l]])
+        vim.cmd([[startinsert]])
+        break -- Sai do loop quando encontrar as aspas
+      end
+      break -- Sai do loop quando encontrar as aspas
+    end
+
+    index = index + 1
+    char_under_cursor = line:sub(index, index)
+  end
+end, { desc = "" })
+
+map("n", "cQ", function()
+  -- Salva a posição atual do cursor
+  local cursor_position = vim.api.nvim_win_get_cursor(0)
+  local line = vim.api.nvim_get_current_line()
+
+  -- Obtém o caractere sob o cursor
+  local char_under_cursor = line:sub(cursor_position[2] - 1, cursor_position[2] - 1)
+
+  -- Itera até encontrar as aspas ou o final da linha
+  local index = cursor_position[2]
+  while index <= #line do
+    if char_under_cursor == '"' or char_under_cursor == "'" then
+      -- Se estiver dentro de aspas duplas, seleciona o texto dentro delas
+      if char_under_cursor == '"' then
+        vim.cmd([[normal! ca"]])
+        vim.cmd([[normal! l]])
+        vim.cmd([[startinsert]])
+        -- Se estiver dentro de aspas simples, seleciona o texto dentro delas
+        break -- Sai do loop quando encontrar as aspas
+      elseif char_under_cursor == "'" then
+        vim.cmd([[normal! ca']])
+        vim.cmd([[normal! l]])
+        vim.cmd([[startinsert]])
+        break -- Sai do loop quando encontrar as aspas
+      end
+      break -- Sai do loop quando encontrar as aspas
+    end
+
+    index = index + 1
+    char_under_cursor = line:sub(index, index)
+  end
+end, { desc = "" })
 
 map("n", "eq", function()
   -- Salva a posição atual do cursor
@@ -402,7 +465,6 @@ map("n", "eq", function()
 
   -- Obtém o caractere sob o cursor
   local char_under_cursor = line:sub(cursor_position[2] - 1, cursor_position[2] - 1)
-  print(char_under_cursor)
 
   -- Itera até encontrar as aspas ou o final da linha
   local index = cursor_position[2]
@@ -423,6 +485,91 @@ map("n", "eq", function()
     index = index + 1
     char_under_cursor = line:sub(index, index)
   end
-end, { desc = "Teste" })
+end, { desc = "" })
 
--- print('Evandro')
+map("n", "eQ", function()
+  -- Salva a posição atual do cursor
+  local cursor_position = vim.api.nvim_win_get_cursor(0)
+  local line = vim.api.nvim_get_current_line()
+
+  -- Obtém o caractere sob o cursor
+  local char_under_cursor = line:sub(cursor_position[2] - 1, cursor_position[2] - 1)
+
+  -- Itera até encontrar as aspas ou o final da linha
+  local index = cursor_position[2]
+  while index <= #line do
+    if char_under_cursor == '"' or char_under_cursor == "'" then
+      -- Se estiver dentro de aspas duplas, seleciona o texto dentro delas
+      if char_under_cursor == '"' then
+        vim.cmd([[normal! ya"]])
+        -- Se estiver dentro de aspas simples, seleciona o texto dentro delas
+        break -- Sai do loop quando encontrar as aspas
+      elseif char_under_cursor == "'" then
+        vim.cmd([[normal! ya']])
+        break -- Sai do loop quando encontrar as aspas
+      end
+      break -- Sai do loop quando encontrar as aspas
+    end
+
+    index = index + 1
+    char_under_cursor = line:sub(index, index)
+  end
+end, { desc = "" })
+
+map("n", "dq", function()
+  -- Salva a posição atual do cursor
+  local cursor_position = vim.api.nvim_win_get_cursor(0)
+  local line = vim.api.nvim_get_current_line()
+
+  -- Obtém o caractere sob o cursor
+  local char_under_cursor = line:sub(cursor_position[2] - 1, cursor_position[2] - 1)
+
+  -- Itera até encontrar as aspas ou o final da linha
+  local index = cursor_position[2]
+  while index <= #line do
+    if char_under_cursor == '"' or char_under_cursor == "'" then
+      -- Se estiver dentro de aspas duplas, seleciona o texto dentro delas
+      if char_under_cursor == '"' then
+        vim.cmd([[normal! di"]])
+        -- Se estiver dentro de aspas simples, seleciona o texto dentro delas
+        break -- Sai do loop quando encontrar as aspas
+      elseif char_under_cursor == "'" then
+        vim.cmd([[normal! di']])
+        break -- Sai do loop quando encontrar as aspas
+      end
+      break -- Sai do loop quando encontrar as aspas
+    end
+
+    index = index + 1
+    char_under_cursor = line:sub(index, index)
+  end
+end, { desc = "" })
+
+map("n", "dQ", function()
+  -- Salva a posição atual do cursor
+  local cursor_position = vim.api.nvim_win_get_cursor(0)
+  local line = vim.api.nvim_get_current_line()
+
+  -- Obtém o caractere sob o cursor
+  local char_under_cursor = line:sub(cursor_position[2] - 1, cursor_position[2] - 1)
+
+  -- Itera até encontrar as aspas ou o final da linha
+  local index = cursor_position[2]
+  while index <= #line do
+    if char_under_cursor == '"' or char_under_cursor == "'" then
+      -- Se estiver dentro de aspas duplas, seleciona o texto dentro delas
+      if char_under_cursor == '"' then
+        vim.cmd([[normal! da"]])
+        -- Se estiver dentro de aspas simples, seleciona o texto dentro delas
+        break -- Sai do loop quando encontrar as aspas
+      elseif char_under_cursor == "'" then
+        vim.cmd([[normal! da']])
+        break -- Sai do loop quando encontrar as aspas
+      end
+      break -- Sai do loop quando encontrar as aspas
+    end
+
+    index = index + 1
+    char_under_cursor = line:sub(index, index)
+  end
+end, { desc = "" })
