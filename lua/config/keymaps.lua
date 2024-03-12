@@ -220,6 +220,7 @@ map("v", "|", "<cmd>:vsplit<cr>")
 
 map("n", "<C-left>", "b")
 map("n", "<C-right>", "w")
+
 map("", "<pageDown>", "<C-d>")
 map("", "<pageUp>", "<C-u>")
 map("i", "<C-s>", "<cmd>w!<cr><Esc>zzi")
@@ -247,7 +248,7 @@ map("v", "<C-p>", "<Esc>:")
 -- end, { desc = "Format" })
 --
 -- map("n", "<Esc>", "zz")
-map("n", "<Esc>", "==zz")
+-- map("n", "<Esc>", "==zz")
 
 -- delete
 map("n", "dx", "di'")
@@ -573,3 +574,22 @@ map("n", "dQ", function()
     char_under_cursor = line:sub(index, index)
   end
 end, { desc = "" })
+
+-- map("n", "<Esc>", "==zz")
+map("i", "<f7>", "<Esc>")
+
+map("n", "<Esc>", function()
+  -- Salva a posição atual do cursor
+  local cursor_position = vim.api.nvim_win_get_cursor(0)
+  local current_line = cursor_position[1]
+  local current_col = cursor_position[2]
+
+  -- Formata todo o arquivo com "=" em cada linha
+  vim.cmd([[silent! normal! ggVG=]])
+
+  -- Retorna o cursor para a posição salva
+  vim.api.nvim_win_set_cursor(0, { current_line, current_col })
+
+  -- Centraliza a linha
+  vim.cmd("normal! zz")
+end, { desc = "Format any file" })
