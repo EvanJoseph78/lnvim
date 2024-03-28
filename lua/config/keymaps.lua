@@ -40,6 +40,9 @@ end, { remap = true })
 vim.keymap.set("", "s", function()
   hop.hint_char1()
 end, { remap = true })
+vim.keymap.set("v", "<C-f>", function()
+  hop.hint_char1()
+end, { remap = true })
 
 -- formatting
 --
@@ -56,13 +59,14 @@ map("n", "<leader>gG", function()
 end, { desc = "Lazygit (cwd)" })
 
 -- quit
-map("n", "Q", "<cmd>q!<cr>", { desc = "Quit" })
+-- map("n", "Q", "<cmd>q!<cr>", { desc = "Quit" })
 map("n", "<C-d>", "<cmd>q!<cr>", { desc = "Quit" })
 map("v", "<C-d>", "<cmd>q!<cr>", { desc = "Quit" })
 map("i", "<C-d>", "<cmd>q!<cr>", { desc = "Quit" })
 
 -- delete
 map("n", "<C-x>", "dd")
+map("n", "dl", "_D")
 map("v", "<C-x>", "d")
 map("i", "<C-x>", "<Esc>ddi")
 
@@ -203,17 +207,26 @@ map("v", "p", '"_dP"')
 -- Utilits Remap
 
 --
-map("n", "b", "@")
+map("n", ",", "*")
+map("n", "Q", "q")
+map("n", "q", "@")
+
+map("n", "M", "'")
+map("n", ";", "'")
 
 map("n", "<F12>", "<cmd>:Neotree filesystem reveal left toggle<cr>")
 map("i", "<F12>", "<cmd>:Neotree filesystem reveal left toggle<cr>")
 map("v", "<F12>", "<cmd>:Neotree filesystem reveal left toggle<cr>")
+map("n", "<A-left>", "<cmd>:Neotree filesystem reveal left toggle<cr>")
+map("i", "<A-left>", "<cmd>:Neotree filesystem reveal left toggle<cr>")
+map("v", "<A-left>", "<cmd>:Neotree filesystem reveal left toggle<cr>")
+
 map("n", "<F2>", "<cmd>:Telescope live_grep<cr>")
 map("i", "<F2>", "<cmd>:Telescope live_grep<cr>")
 map("v", "<F2>", "<cmd>:Telescope live_grep<cr>")
 
-map("n", "m", '"')
-map("v", "m", '"')
+map("n", "b", '"')
+map("v", "b", '"')
 
 map("n", "|", "<cmd>:vsplit<cr>")
 map("v", "|", "<cmd>:vsplit<cr>")
@@ -240,6 +253,7 @@ map("n", "<BS>", "x")
 map("n", "<C-p>", ":")
 map("i", "<C-p>", "<Esc>:")
 map("v", "<C-p>", "<Esc>:")
+map("n", "<F7>", "<C-v>")
 
 -- formatting
 -- map("n", "<Esc>", function()
@@ -268,6 +282,7 @@ map("n", "cx", "ci'")
 map("n", "cq", 'ci"')
 map("n", "cj", "ci(")
 map("n", "co", "ci{")
+map("n", "cn", "cit")
 map("n", "ck", "ci[")
 map("n", "cn", "cit")
 map("n", "cA", "ggcG")
@@ -284,6 +299,7 @@ map("n", "ex", "yi'")
 map("n", "eq", 'yi"')
 map("n", "ej", "yi(")
 map("n", "eo", "yi{")
+map("n", "en", "yit")
 map("n", "ek", "yi[")
 map("n", "en", "yit")
 map("n", "eA", "ggyG")
@@ -296,17 +312,22 @@ map("n", "el", "_y$") -- copia linha sem quebra de linha
 -- copy
 
 -- past
-map("v", "w", "p")
+
 map("n", "W", "P")
-map("n", "ww", "p")
-map("n", "wx", "vi'p")
-map("n", "wq", 'vi"p')
-map("n", "wj", "vi(p")
-map("n", "wo", "vi{p")
-map("n", "wk", "vi[p")
-map("n", "wn", "vitp")
-map("n", "wA", "ggvGp")
-map("n", "wW", "viwp")
+map("v", "w", "p")
+map("n", "w", "p")
+
+-- map("v", "w", "p")
+-- map("n", "W", "P")
+-- map("n", "ww", "p")
+-- map("n", "wx", "vi'p")
+-- map("n", "wq", 'vi"p')
+-- map("n", "wj", "vi(p")
+-- map("n", "wo", "vi{p")
+-- map("n", "wk", "vi[p")
+-- map("n", "wn", "vitp")
+-- map("n", "wA", "ggvGp")
+-- map("n", "wW", "viwp")
 
 -- Visual
 
@@ -318,6 +339,7 @@ map("n", "vj", "vi(")
 map("n", "vi", "va(")
 map("v", "(", "c()<Esc>hp")
 map("n", "vo", "vi{")
+map("n", "vn", "vit")
 map("v", "{", "c{}<Esc>hp")
 map("n", "vk", "vi[")
 map("v", "[", "c[]<Esc>hp")
@@ -577,8 +599,14 @@ end, { desc = "" })
 
 -- map("n", "<Esc>", "==zz")
 map("i", "<f7>", "<Esc>")
+map("n", "<Esc>", "zz")
+map("n", "<f1>", "<C-x>")
+map("n", "<f3>", "<C-a>")
+map("n", "E", '"')
+map("v", "E", '"')
 
-map("n", "<Esc>", function()
+map("n", "=l", "==")
+map("n", "==", function()
   -- Salva a posição atual do cursor
   local cursor_position = vim.api.nvim_win_get_cursor(0)
   local current_line = cursor_position[1]
@@ -593,3 +621,31 @@ map("n", "<Esc>", function()
   -- Centraliza a linha
   vim.cmd("normal! zz")
 end, { desc = "Format any file" })
+
+-- Mapeamento para alternar a palavra entre "true" e "false"
+map("n", "<leader>j", function()
+  -- Salva a posição atual do cursor
+  local cursor_position = vim.api.nvim_win_get_cursor(0)
+
+  -- Move o cursor para o início da palavra
+  vim.fn.search("\\<\\S\\%#", "bcW")
+
+  -- Obtém a palavra sob o cursor
+  local word_under_cursor = vim.fn.expand("<cword>")
+
+  -- Verifica se a palavra é "true" ou "false" e troca para a outra
+  if word_under_cursor == "true" then
+    vim.cmd([[silent! normal! ciwfalse]])
+  elseif word_under_cursor == "false" then
+    vim.cmd([[silent! normal! ciwtrue]])
+  elseif word_under_cursor == "False" then
+    vim.cmd([[silent! normal! ciwTrue]])
+  elseif word_under_cursor == "True" then
+    vim.cmd([[silent! normal! ciwFalse]])
+  else
+    -- Se a palavra não é "true" nem "false", não faz nada
+  end
+
+  -- Move o cursor para a posição original
+  vim.api.nvim_win_set_cursor(0, { cursor_position[1], cursor_position[2] })
+end, { desc = "Troca a palavra entre 'true' e 'false'" })
